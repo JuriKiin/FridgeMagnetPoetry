@@ -13,11 +13,11 @@ Features:
 Design/ScreenShots/ColorScheme.png
 
 2. Created initial mockup designs for poem page
-Design/ScreenShots/SS_WordSettings.png
-Design/ScreenShots/SS_PoemSettings.png
+! [alt text] (Design/ScreenShots/SS_WordSettings.png)
+! [alt text] (Design/ScreenShots/SS_PoemSettings.png)
 
 3. Phase 1 looks like this:
-Design/ScreenShots/SS_Phase1.png
+! [alt text] (Design/ScreenShots/SS_Phase1.png)
 
 ##Current Features
 Default words are neatly placed on screen to start the app. The user is able to drag words around with a pan gesture and move the words in any order they wish.
