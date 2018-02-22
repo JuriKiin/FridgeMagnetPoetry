@@ -12,10 +12,18 @@ class WordStorage{
     
     var wordsets: [Wordset]   //Array of wordsets
     var wordsetIncrement: Int = 0
-
+    let wordSetKey = "wordsetStringKey"
+    var activeWordSet:Wordset{
+        didSet{
+           // let defaults = UserDefaults.standard
+           // defaults.set(wordsets[wordsetIncrement], forKey:wordSetKey)
+        }
+    }
     
     init(){
         self.wordsets = []
+        self.activeWordSet = Wordset(name: "temp", words: [])
+        readDefaults()
         generateWordSets()
     }
     
@@ -37,11 +45,16 @@ class WordStorage{
         wordsets.append(emojiWordSet)
     }
     
+    func readDefaults(){
+//        let defaults = UserDefaults.standard
+//        activeWordSet = defaults.object(forKey: wordSetKey) as! Wordset
+    }
     
     
     //functions
     func returnWordSet() -> Wordset {
-        return wordsets[wordsetIncrement]
+        activeWordSet = wordsets[wordsetIncrement]
+        return activeWordSet
     }
     
     func incrementWordSet(step: Int) -> Wordset{
