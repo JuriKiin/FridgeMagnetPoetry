@@ -41,6 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1127ECC3203CE60A0074C73A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11C2A525203682B400DAEFFF /* WordStorage.swift */,
+				11C2A52720368B5100DAEFFF /* Wordset.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1127ECC4203CE61C0074C73A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				117EF9CB2036358F0035CF51 /* CustomCollectionViewCell.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		1127ECC5203CE62E0074C73A /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				11E70FB420276F3100D8228A /* ViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		11E70FA620276F3100D8228A = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +85,14 @@
 		11E70FB120276F3100D8228A /* Magneto-1 */ = {
 			isa = PBXGroup;
 			children = (
+				1127ECC5203CE62E0074C73A /* VC */,
+				1127ECC4203CE61C0074C73A /* Helper */,
+				1127ECC3203CE60A0074C73A /* Model */,
 				11E70FB220276F3100D8228A /* AppDelegate.swift */,
-				11E70FB420276F3100D8228A /* ViewController.swift */,
-				117EF9CB2036358F0035CF51 /* CustomCollectionViewCell.swift */,
 				11E70FB620276F3100D8228A /* Main.storyboard */,
 				11E70FB920276F3100D8228A /* Assets.xcassets */,
 				11E70FBB20276F3100D8228A /* LaunchScreen.storyboard */,
 				11E70FBE20276F3100D8228A /* Info.plist */,
-				11C2A525203682B400DAEFFF /* WordStorage.swift */,
-				11C2A52720368B5100DAEFFF /* Wordset.swift */,
 			);
 			path = "Magneto-1";
 			sourceTree = "<group>";
