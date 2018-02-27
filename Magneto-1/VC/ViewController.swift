@@ -182,26 +182,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //For each word in the array
         for word in currentWordSet.wordList {
             //Create a label for it
-            let l = UILabel()
+            let newLabel = UILabel()
             //Set the label properties
-            l.backgroundColor = UIColor(red: 0xF0, green: 0xF0, blue: 0xC9, alpha: 1.0)
-            l.text = "   \(word)   "
+            newLabel.backgroundColor = UIColor(red: 0xF0, green: 0xF0, blue: 0xC9, alpha: 1.0)
+            newLabel.text = "   \(word)   "
             //Set font size correctly if user is on iPad or iPhone
             if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-                l.font = l.font.withSize(30)
+                newLabel.font = newLabel.font.withSize(30)
             }else {
-                 l.font = l.font.withSize(20)
+                 newLabel.font = newLabel.font.withSize(20)
             }
-            l.layer.borderColor = UIColor.black.cgColor
-            l.layer.borderWidth = 1.0
-            l.sizeToFit()
-            wordArray.append(l)
-            view.addSubview(l)
+            newLabel.layer.borderColor = UIColor.black.cgColor
+            newLabel.layer.borderWidth = 1.0
+            newLabel.sizeToFit()
+            wordArray.append(newLabel)
+            view.addSubview(newLabel)
             //Make it interactable
-            l.isUserInteractionEnabled = true
+            newLabel.isUserInteractionEnabled = true
             //Add a pan gesture to the label
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
-            l.addGestureRecognizer(panGesture)
+            newLabel.addGestureRecognizer(panGesture)
         }
         organizeWords()
     }
