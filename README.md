@@ -9,6 +9,7 @@ Features:
 3. Cycle through different word sets in the same poem for a more diverse selection
 
 ##Checkpoint 1:
+
 1. Selected a color scheme for the base app
 ![alt text](Design/ScreenShots/multiWordSet.png)
 
@@ -20,6 +21,7 @@ Features:
 ![alt text](Design/ScreenShots/SS_Phase1.png)
 
 ##Checkpoint 2:
+
 1. User is able to select from multiple word-sets
 ![alt text](Design/ScreenShots/multiWordSet.png)
 

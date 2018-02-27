@@ -44,14 +44,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     //Actions
-    @IBAction func LoadImagePicker(_ sender: Any) {
+    @IBAction func loadImagePicker(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
     
     
     
-    @IBAction func UpdateFontSize(_ sender: Any) {
+    @IBAction func updateFontSize(_ sender: Any) {
         currentFontSize = fontSizeStepper.value
         for word in wordArray{
             word.font = word.font.withSize(CGFloat(currentFontSize))
@@ -61,21 +61,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         fontSizeLabel.sizeToFit()
     }
     
-    @IBAction func ToggleSettingsView(_ sender: Any) {
+    @IBAction func toggleSettingsView(_ sender: Any) {
         settingsView.isHidden = !settingsView.isHidden
         isSettingsViewOpen = !isSettingsViewOpen
         view.bringSubview(toFront: settingsView)
     }
     
     
-    @IBAction func DecrementWordSet(_ sender: Any) {
-        currentWordSet = wordManager.incrementWordSet(step:-1)
-        SetCurrentWordSet()
+    @IBAction func decrementWordSet(_ sender: Any) {
+        currentWordSet = wordManager.incrementWordSet(step: -1)
+        setCurrentWordSet()
         wordCollectionView.reloadData()
     }
-    @IBAction func IncrementWordSet(_ sender: Any) {
-        currentWordSet = wordManager.incrementWordSet(step:1)
-        SetCurrentWordSet()
+    @IBAction func incrementWordSet(_ sender: Any) {
+        currentWordSet = wordManager.incrementWordSet(step: 1)
+        setCurrentWordSet()
         wordCollectionView.reloadData()
     }
     
@@ -83,6 +83,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return currentWordSet.wordList.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = wordCollectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath) as! CustomCollectionViewCell
         
@@ -91,7 +92,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.wordLabel.layer.borderWidth = 2.0
         
         //Add touch hold recognizer
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(AddWord(longPress:)))
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(addWord(longPress:)))
         cell.addGestureRecognizer(longPressRecognizer)
         
         return cell
@@ -100,10 +101,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        LoadSettingsForDevice()
+        loadSettingsForDevice()
         settingsView.isHidden = true
         
-        SetCurrentWordSet()
+        setCurrentWordSet()
         
         imagePicker.delegate = self
         wordCollectionView.delegate = self
@@ -117,7 +118,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //FUNCTIONS
     
-    func LoadSettingsForDevice(){
+    func loadSettingsForDevice() {
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             currentFontSize = 30
         }
@@ -126,53 +127,53 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-    @objc func AddWord(longPress: UILongPressGestureRecognizer){
+    @objc func addWord(longPress: UILongPressGestureRecognizer) {
         
-        if longPress.state == UIGestureRecognizerState.began  && isSettingsViewOpen == false{
-            let l = UILabel()
+        if longPress.state == UIGestureRecognizerState.began  && isSettingsViewOpen == false {
+            let newLabel = UILabel()
             //Set the label properties
             let cell = longPress.view as! CustomCollectionViewCell
-            l.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            l.text = "   \(cell.wordLabel.text!)   "
-            l.font = l.font.withSize(CGFloat(currentFontSize))
-            l.layer.borderColor = UIColor.black.cgColor
-            l.layer.borderWidth = 1.0
-            l.sizeToFit()
-            wordArray.append(l)
-            view.addSubview(l)
+            newLabel.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            newLabel.text = "   \(cell.wordLabel.text!)   "
+            newLabel.font = newLabel.font.withSize(CGFloat(currentFontSize))
+            newLabel.layer.borderColor = UIColor.black.cgColor
+            newLabel.layer.borderWidth = 1.0
+            newLabel.sizeToFit()
+            wordArray.append(newLabel)
+            view.addSubview(newLabel)
             //Make it interactable
-            l.isUserInteractionEnabled = true
+            newLabel.isUserInteractionEnabled = true
             //Add a pan gesture to the label
-            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(DoPanGesture))
-            l.addGestureRecognizer(panGesture)
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
+            newLabel.addGestureRecognizer(panGesture)
             
             //Add Long press gesture to the label
-            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(EditLabel(longPress:)))
-            l.addGestureRecognizer(longPressRecognizer)
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(editLabel(longPress:)))
+            newLabel.addGestureRecognizer(longPressRecognizer)
             
             //Get the position of the longPress to animate from there.
             let position = longPress.location(in: view)
-            l.center = position
+            newLabel.center = position
             
             //Add the placing word animation
             UIView.animate(withDuration:0.5,
                 delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0, options: [],
                 animations: {
-                    l.center = CGPoint(x: self.view.frame.width/2,y: self.view.frame.height/2)
-                    l.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                    newLabel.center = CGPoint(x: self.view.frame.width/2,y: self.view.frame.height/2)
+                    newLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
                 },
                 completion: {(finished:Bool) in
                     //When completed, reset the animation
                     UIView.animate(withDuration:0.2,
                                    delay: -0.5, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0, options: [],
                                    animations: {
-                                    l.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                                    newLabel.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                     })
                 })
         }
     }
     
-    @objc func EditLabel(longPress: UILongPressGestureRecognizer){
+    @objc func editLabel(longPress: UILongPressGestureRecognizer){
          if longPress.state == UIGestureRecognizerState.began {
             
         }
@@ -180,17 +181,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     //Sets the current wordSet from the cycle
-    func SetCurrentWordSet(){
+    func setCurrentWordSet() {
         currentWordSet = wordManager.returnWordSet()
         wordSetHeader.text = currentWordSet.name
     }
     
     
     //If we want to place every word in the set on the board
-    func PlaceWords(){
+    func placeWords() {
         
         //For each word in the array
-        for word in currentWordSet.wordList{
+        for word in currentWordSet.wordList {
             //Create a label for it
             let l = UILabel()
             //Set the label properties
@@ -210,13 +211,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             //Make it interactable
             l.isUserInteractionEnabled = true
             //Add a pan gesture to the label
-            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(DoPanGesture))
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
             l.addGestureRecognizer(panGesture)
         }
         organizeWords()
     }
     
-    func organizeWords(){
+    func organizeWords() {
         
         //Get properties of view size we need to use to display the labels
         let widthMargin = 50
@@ -231,7 +232,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         wordArray[0].center = CGPoint(x: startXPosition, y: startYPosition)
         
         //Loop through each word and make rows
-        for i in 1...wordArray.count-1{
+        for i in 1 ..< wordArray.count {
             wordArray[i].center = CGPoint(x: wordArray[i-1].frame.maxX + CGFloat(widthMargin), y: startYPosition)
             count += 1.0
             //If we have reached the end of the view, wrap around
@@ -245,21 +246,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //This function clears all UILabels from the viewall
     // (Used when loading a new word set)
-    func ClearBoard(){
-        for v in view.subviews{
-            if v is UILabel{
-                v.removeFromSuperview()
+    func clearBoard() {
+        for view in view.subviews {
+            if view is UILabel{
+                view.removeFromSuperview()
             }
         }
     }
     
-    @objc func DoPanGesture(panGesture:UIPanGestureRecognizer){
+    @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
         //Get positions and update label position
         let label = panGesture.view as! UILabel
         let position = panGesture.location(in: view)
         label.center = position
         
-        if panGesture.state == UIGestureRecognizerState.changed{
+        if panGesture.state == UIGestureRecognizerState.changed {
              infoButton.setImage(UIImage(named: "trashIcon.png"), for: UIControlState.normal)
             label.backgroundColor = UIColor(white: 1, alpha: 0.5)
         }
@@ -268,11 +269,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
              label.backgroundColor = UIColor(white: 1, alpha: 1.0)
         }
         
-        if panGesture.state == UIGestureRecognizerState.ended && (position.x > infoButton.frame.minX && position.y < infoButton.frame.maxY){
+        if panGesture.state == UIGestureRecognizerState.ended && (position.x > infoButton.frame.minX && position.y < infoButton.frame.maxY) {
             label.removeFromSuperview()
             wordArray.remove(at: wordArray.index(of: label)!)
         }
-        if panGesture.state == UIGestureRecognizerState.ended && (position.y > wordSetHeader.frame.minY){
+        if panGesture.state == UIGestureRecognizerState.ended && (position.y > wordSetHeader.frame.minY) {
             label.center = CGPoint(x: label.center.x, y: wordSetHeader.frame.minY - 25)
         }
         

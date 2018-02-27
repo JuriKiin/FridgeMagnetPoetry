@@ -19,6 +19,11 @@ class WordStorage{
            // defaults.set(wordsets[wordsetIncrement], forKey:wordSetKey)
         }
     }
+    /*
+     if let ocunter = defaults.value(forLey: counterey) as? Int{
+        
+     }
+    */
     
     init(){
         self.wordsets = []
