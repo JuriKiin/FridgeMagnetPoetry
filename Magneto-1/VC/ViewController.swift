@@ -92,8 +92,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.wordLabel.layer.borderWidth = 2.0
         
         //Add touch hold recognizer
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(addWord(longPress:)))
-        cell.addGestureRecognizer(longPressRecognizer)
+        let pressRecognizer = UITapGestureRecognizer(target: self, action: #selector(addWord(press:)))
+        cell.addGestureRecognizer(pressRecognizer)
         
         return cell
     }
@@ -127,12 +127,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-    @objc func addWord(longPress: UILongPressGestureRecognizer) {
+    @objc func addWord(press: UITapGestureRecognizer) {
         
-        if longPress.state == UIGestureRecognizerState.began  && isSettingsViewOpen == false {
+        if isSettingsViewOpen == false {
             let newLabel = UILabel()
             //Set the label properties
-            let cell = longPress.view as! CustomCollectionViewCell
+            let cell = press.view as! CustomCollectionViewCell
             newLabel.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             newLabel.text = "   \(cell.wordLabel.text!)   "
             newLabel.font = newLabel.font.withSize(CGFloat(currentFontSize))
@@ -147,12 +147,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
             newLabel.addGestureRecognizer(panGesture)
             
-            //Add Long press gesture to the label
-            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(editLabel(longPress:)))
-            newLabel.addGestureRecognizer(longPressRecognizer)
-            
             //Get the position of the longPress to animate from there.
-            let position = longPress.location(in: view)
+            let position = press.location(in: view)
             newLabel.center = position
             
             //Add the placing word animation
@@ -172,13 +168,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 })
         }
     }
-    
-    @objc func editLabel(longPress: UILongPressGestureRecognizer){
-         if longPress.state == UIGestureRecognizerState.began {
-            
-        }
-    }
-    
     
     //Sets the current wordSet from the cycle
     func setCurrentWordSet() {
