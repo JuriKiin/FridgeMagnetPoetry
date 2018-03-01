@@ -122,34 +122,6 @@
                                             <action selector="loadImagePicker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ArN-d8-fDu"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Font Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8K-vL-at4">
-                                        <rect key="frame" x="169" y="69" width="123" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Font Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLX-kE-lJi">
-                                        <rect key="frame" x="8" y="63" width="171" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" maximumValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="DpT-28-kid">
-                                        <rect key="frame" x="183" y="108" width="94" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="updateFontSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="Cjv-Fj-uzs"/>
-                                        </connections>
-                                    </stepper>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2U-ow-uMp">
-                                        <rect key="frame" x="149" y="112" width="21" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvD-XV-Qqk">
                                         <rect key="frame" x="210" y="153" width="83" height="30"/>
                                         <state key="normal" title="Share Poem"/>
@@ -160,9 +132,20 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Font Size:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqt-7y-Tuc">
-                                        <rect key="frame" x="8" y="98" width="171" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" maximumValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="DpT-28-kid">
+                                        <rect key="frame" x="182" y="78" width="94" height="29"/>
+                                        <connections>
+                                            <action selector="updateFontSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="Cjv-Fj-uzs"/>
+                                        </connections>
+                                    </stepper>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2U-ow-uMp">
+                                        <rect key="frame" x="148" y="82" width="21" height="24"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Font Size:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqt-7y-Tuc">
+                                        <rect key="frame" x="8" y="68" width="171" height="50"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -173,12 +156,21 @@
                                     <constraint firstItem="613-wY-yKd" firstAttribute="leading" secondItem="ofs-WQ-20L" secondAttribute="leading" constant="8" id="0K1-7R-KGR"/>
                                     <constraint firstItem="XYB-n5-yXI" firstAttribute="top" secondItem="ofs-WQ-20L" secondAttribute="top" constant="12" id="5z9-CW-rDn"/>
                                     <constraint firstItem="XYB-n5-yXI" firstAttribute="centerX" secondItem="ofs-WQ-20L" secondAttribute="centerX" id="89g-am-qAO"/>
+                                    <constraint firstAttribute="trailing" secondItem="aqt-7y-Tuc" secondAttribute="trailing" constant="122" id="AMZ-nK-Mck"/>
+                                    <constraint firstItem="B2U-ow-uMp" firstAttribute="top" secondItem="ofs-WQ-20L" secondAttribute="top" constant="82" id="CBp-ti-jAW"/>
+                                    <constraint firstAttribute="bottom" secondItem="DpT-28-kid" secondAttribute="bottom" constant="127" id="Eob-f6-L4h"/>
                                     <constraint firstAttribute="trailing" secondItem="XvD-XV-Qqk" secondAttribute="trailing" constant="8" id="JEA-Nn-HdM"/>
+                                    <constraint firstAttribute="bottom" secondItem="aqt-7y-Tuc" secondAttribute="bottom" constant="116" id="M7I-1x-ddK"/>
                                     <constraint firstItem="Je4-ne-RSq" firstAttribute="centerX" secondItem="ofs-WQ-20L" secondAttribute="centerX" id="OYT-8G-K1J"/>
                                     <constraint firstItem="Je4-ne-RSq" firstAttribute="width" secondItem="ofs-WQ-20L" secondAttribute="width" id="OyX-cZ-lI0"/>
+                                    <constraint firstItem="aqt-7y-Tuc" firstAttribute="leading" secondItem="ofs-WQ-20L" secondAttribute="leading" constant="8" id="Qdh-VA-vsG"/>
+                                    <constraint firstAttribute="trailing" secondItem="DpT-28-kid" secondAttribute="trailing" constant="25" id="RZz-0S-wSm"/>
+                                    <constraint firstItem="aqt-7y-Tuc" firstAttribute="top" secondItem="ofs-WQ-20L" secondAttribute="top" constant="68" id="SAf-bg-TJd"/>
+                                    <constraint firstItem="DpT-28-kid" firstAttribute="leading" secondItem="ofs-WQ-20L" secondAttribute="leading" constant="182" id="Yqj-h5-bUI"/>
                                     <constraint firstAttribute="bottom" secondItem="Je4-ne-RSq" secondAttribute="bottom" id="hqD-Tx-PKd"/>
                                     <constraint firstAttribute="bottom" secondItem="XvD-XV-Qqk" secondAttribute="bottom" constant="51" id="lxb-aU-VRn"/>
                                     <constraint firstAttribute="bottom" secondItem="613-wY-yKd" secondAttribute="bottom" constant="51" id="rG8-7L-vLe"/>
+                                    <constraint firstItem="DpT-28-kid" firstAttribute="top" secondItem="ofs-WQ-20L" secondAttribute="top" constant="78" id="vf7-Wq-aiX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -209,7 +201,6 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="YYC-8S-kHI" id="WXc-Wj-NRM"/>
-                        <outlet property="fontNameLabel" destination="l8K-vL-at4" id="B7h-FV-w2T"/>
                         <outlet property="fontSizeLabel" destination="B2U-ow-uMp" id="cSc-I8-U5K"/>
                         <outlet property="fontSizeStepper" destination="DpT-28-kid" id="f1d-bb-kjx"/>
                         <outlet property="infoButton" destination="UY2-yg-Zgu" id="3Yp-27-twb"/>
