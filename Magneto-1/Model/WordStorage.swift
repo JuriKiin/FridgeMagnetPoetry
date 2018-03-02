@@ -13,22 +13,11 @@ class WordStorage{
     var wordsets: [Wordset]   //Array of wordsets
     var wordsetIncrement: Int = 0
     let wordSetKey = "wordsetStringKey"
-    var activeWordSet:Wordset{
-        didSet{
-           // let defaults = UserDefaults.standard
-           // defaults.set(wordsets[wordsetIncrement], forKey:wordSetKey)
-        }
-    }
-    /*
-     if let ocunter = defaults.value(forLey: counterey) as? Int{
-        
-     }
-    */
+    var activeWordSet:Wordset
     
     init(){
         self.wordsets = []
         self.activeWordSet = Wordset(name: "temp", words: [])
-        readDefaults()
         generateWordSets()
     }
     
@@ -48,11 +37,6 @@ class WordStorage{
         wordsets.append(sportsWordSet)
         let emojiWordSet = Wordset(name: "Emojis", words: emojis)
         wordsets.append(emojiWordSet)
-    }
-    
-    func readDefaults(){
-//        let defaults = UserDefaults.standard
-//        activeWordSet = defaults.object(forKey: wordSetKey) as! Wordset
     }
     
     

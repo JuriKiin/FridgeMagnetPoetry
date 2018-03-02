@@ -4,11 +4,10 @@
 //
 //  Created by Juri Kiin on 2/4/18.
 //  Copyright © 2018 Juri Kiin. All rights reserved.
-//
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UINavigationControllerDelegate {
 
     let wordManager = WordStorage()
     
@@ -33,23 +32,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet var backgroundImageView: UIImageView!
     let imagePicker = UIImagePickerController()
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        backgroundImageView.image = image
-        dismiss(animated: true, completion: nil)
-    }
+
     
     //Actions
     @IBAction func loadImagePicker(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
-    
-    
     
     @IBAction func updateFontSize(_ sender: Any) {
         currentFontSize = fontSizeStepper.value
@@ -79,25 +68,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         wordCollectionView.reloadData()
     }
     
-    //Collection view delegate functions
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentWordSet.wordList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = wordCollectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath) as! CustomCollectionViewCell
-        
-        cell.wordLabel.text = currentWordSet.wordList[indexPath.row]
-        cell.wordLabel.layer.borderColor = UIColor.black.cgColor
-        cell.wordLabel.layer.borderWidth = 2.0
-        
-        //Add touch hold recognizer
-        let pressRecognizer = UITapGestureRecognizer(target: self, action: #selector(addWord(press:)))
-        cell.addGestureRecognizer(pressRecognizer)
-        
-        return cell
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -107,7 +77,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         setCurrentWordSet()
         
         imagePicker.delegate = self
-        wordCollectionView.delegate = self
         wordCollectionView.dataSource = self
         
         //This loads all of the words on the screen for the active wordset.
@@ -270,4 +239,42 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
 
 }
+
+
+extension ViewController: UIImagePickerControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        backgroundImageView.image = image
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    //Collection view delegate functions
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return currentWordSet.wordList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = wordCollectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath) as! CustomCollectionViewCell
+        
+        cell.wordLabel.text = currentWordSet.wordList[indexPath.row]
+        cell.wordLabel.layer.borderColor = UIColor.black.cgColor
+        cell.wordLabel.layer.borderWidth = 2.0
+        
+        //Add touch hold recognizer
+        let pressRecognizer = UITapGestureRecognizer(target: self, action: #selector(addWord(press:)))
+        cell.addGestureRecognizer(pressRecognizer)
+        
+        return cell
+    }
+}
+
+
+
+
 
