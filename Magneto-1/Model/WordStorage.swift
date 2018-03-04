@@ -25,18 +25,22 @@ class WordStorage{
         //Word Sets
         let genericWords: [String] = ["could","cloud","bot","bit","ask","a","geek","flame","file","ed","ed","create","like","lap","is","ing","I","her","drive","get","soft","screen","protect","online","meme","to","they","that","tech","space","source","y","write","while"]
         let emojis: [String] = ["😀", "😁", "😂", "🤣","😃", "😄", "😅", "😆", "😉", "😊", "😋", "😎", "😍", "😘", "😗", "😙", "😚", "☺️", "🙂", "🤗", "🤔", "😐", "😑", "😶", "🙄", "😏", "😣", "😥"]
-        let natureWords: [String] = ["tree", "leaves","pond"]
-        let sportsWords: [String] = ["soccer", "Liverpool FC"]
+        let natureWords: [String] = ["tree", "leaves","pond", "spring", "summer", "fall", "winter", "birds", "natural"]
+        let actionWords: [String] = ["kick", "push", "call", "breathe", "sprint", "walk", "stall", "freeze", "believe", "forget", "scream", "build", "speak"]
+        let properNouns: [String] = ["me", "you", "him", "her", "they", "them", "us", "our", "his", "hers", "theirs", "ours"]
+        
         
         
         let genericWordSet = Wordset(name: "Generic", words: genericWords)
         wordsets.append(genericWordSet)
         let natureWordSet = Wordset(name: "Nature", words: natureWords)
         wordsets.append(natureWordSet)
-        let sportsWordSet = Wordset(name: "Sports", words: sportsWords)
-        wordsets.append(sportsWordSet)
+        let actionWordSet = Wordset(name: "Actions", words: actionWords)
+        wordsets.append(actionWordSet)
         let emojiWordSet = Wordset(name: "Emojis", words: emojis)
         wordsets.append(emojiWordSet)
+        let properNounSet = Wordset(name: "Proper Nouns", words: properNouns)
+        wordsets.append(properNounSet)
     }
     
     
