@@ -46,8 +46,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         self.present(activityVC, animated: true, completion: nil)
     }
     
-    
-    
     @IBAction func loadImagePicker(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
@@ -63,18 +61,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         fontSizeLabel.sizeToFit()
     }
     
+    //This toggles the settings view (backgroundImage, fontSize, share)
     @IBAction func toggleSettingsView(_ sender: Any) {
         settingsView.isHidden = !settingsView.isHidden
         isSettingsViewOpen = !isSettingsViewOpen
         view.bringSubview(toFront: settingsView)
     }
     
-    
+    //Loads the previous wordSet
     @IBAction func decrementWordSet(_ sender: Any) {
         currentWordSet = wordManager.incrementWordSet(step: -1)
         setCurrentWordSet()
         wordCollectionView.reloadData()
     }
+    //Loads the next wordSet
     @IBAction func incrementWordSet(_ sender: Any) {
         currentWordSet = wordManager.incrementWordSet(step: 1)
         setCurrentWordSet()
@@ -83,16 +83,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadSettingsForDevice() //Set font size based on iPad or iPhone
         settingsView.isHidden = true    //Hide the settings view
         setCurrentWordSet()         //Get our current wordset
         imagePicker.delegate = self //Setup image picker
         wordCollectionView.dataSource = self    //Setup word collection view
     }
     
-    //FUNCTIONS
+//Helper Functions
     
+    //Change settings based on iPad or iPhone platform
     func loadSettingsForDevice() {
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             currentFontSize = 30
@@ -102,6 +101,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    //Add a word to the view.
     @objc func addWord(press: UITapGestureRecognizer) {
         if isSettingsViewOpen == false {
             let newLabel = UILabel()
@@ -148,30 +148,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         wordSetHeader.text = currentWordSet.name
     }
     
-    func organizeWords() {
-        //Get properties of view size we need to use to display the labels
-        let widthMargin = 50
-        let heightMargin = 30
-        let screenWidth = view.frame.width
-        let startXPosition:CGFloat = 50
-        var startYPosition:CGFloat = 50
-        var count: CGFloat = 0
-        let labelHeight = wordArray[0].frame.height + CGFloat(heightMargin)
-        //Set the first index of the array
-        wordArray[0].center = CGPoint(x: startXPosition, y: startYPosition)
-        //Loop through each word and make rows
-        for i in 1 ..< wordArray.count {
-            wordArray[i].center = CGPoint(x: wordArray[i-1].frame.maxX + CGFloat(widthMargin), y: startYPosition)
-            count += 1.0
-            //If we have reached the end of the view, wrap around
-            if wordArray[i].frame.maxX > screenWidth {
-                count = 0.0
-                startYPosition += labelHeight
-                wordArray[i].center = CGPoint(x: CGFloat(count) * startXPosition + CGFloat(widthMargin), y: startYPosition)
-            }
-        }
-    }
-    
     //This function clears all UILabels from the viewall
     // (Used when loading a new word set)
     func clearBoard() {
@@ -182,16 +158,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    //Adds the pan gesture to the UILabel
     func addPanGesture(label: UILabel) {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
         label.addGestureRecognizer(panGesture)
     }
     
+    //What to do when we are dragging the word.
     @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
         //Get positions and update label position
         let label = panGesture.view as! UILabel
         let position = panGesture.location(in: view)
         label.center = position
+        
+        //This changes the icon in the top left corner
         if panGesture.state == UIGestureRecognizerState.changed {
              infoButton.setImage(UIImage(named: "trashIcon.png"), for: UIControlState.normal)
             label.backgroundColor = UIColor(white: 1, alpha: 0.5)
@@ -200,6 +180,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
             infoButton.setImage(UIImage(named: "infoIcon"), for: UIControlState.normal)
              label.backgroundColor = UIColor(white: 1, alpha: 1.0)
         }
+        
+        //If we release the word and it's not on the canvas, move it up so its at the bottom of the canvas
         if panGesture.state == UIGestureRecognizerState.ended && (position.x > infoButton.frame.minX && position.y < infoButton.frame.maxY) {
             label.removeFromSuperview()
             wordArray.remove(at: wordArray.index(of: label)!)
@@ -251,8 +233,8 @@ extension ViewController: UICollectionViewDataSource {
 }
 
 extension UIView {
+    //Takes a screenshot of a given canvas size
     func takeScreenShot(rect: CGSize) -> UIImage? {
-        
         UIGraphicsBeginImageContextWithOptions(rect, false, UIScreen.main.scale)
         self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()

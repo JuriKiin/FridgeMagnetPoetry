@@ -1,6 +1,6 @@
 //
 //  Wordset.swift
-//  FridgeMagnet
+//  Fridge Magnet Poetry
 //
 //  Created by Juri Kiin on 2/15/18.
 //  Copyright © 2018 Juri Kiin. All rights reserved.

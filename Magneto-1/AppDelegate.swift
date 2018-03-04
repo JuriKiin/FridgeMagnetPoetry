@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Magneto-1
+//  Fridge Magnet Poetry
 //
 //  Created by Juri Kiin on 2/4/18.
 //  Copyright © 2018 Juri Kiin. All rights reserved.
@@ -23,8 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var posY: [Float] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch
+        //Get access to our viewController
         vc = window?.rootViewController as! ViewController
+        //Load our device settings
+        vc.loadSettingsForDevice()
         
         //Load up any labels we previously had
         wordArr = defaults.object(forKey: wordKey) as? [String] ?? [String]()
@@ -37,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let newLabel = UILabel()
                 //Set the label properties
                 newLabel.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                newLabel.text = "   \(wordArr[i])   "
+                newLabel.text = "\(wordArr[i])"
                 newLabel.font = newLabel.font.withSize(CGFloat(vc.currentFontSize))
                 newLabel.layer.borderColor = UIColor.black.cgColor
                 newLabel.layer.borderWidth = 1.0
@@ -79,15 +81,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
         
+        //Get our current word Array from the view controller
         let labelArray = vc.returnWordArray()
+        //Create temp arrays to store our label data in
         var wordArray: [String] = []
         var xArray: [Float] = []
         var yArray: [Float] = []
+        //Loop through each word and add the data to the array
         for word in labelArray {
             wordArray.append(word.text!)
             xArray.append(Float(word.center.x))
             yArray.append(Float(word.center.y))
         }
+        //Save the data to userDefaults
         defaults.set(wordArray, forKey: wordKey)
         defaults.set(xArray, forKey: xKey)
         defaults.set(yArray, forKey: yKey)
