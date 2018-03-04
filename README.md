@@ -37,4 +37,18 @@ Animation added when longpressing a word from the bank.
 
 The app currently can be used on iPad and iPhone.
 
+##Checkpoint Final:
+
+1. User is able to select a photo from their library and use it as the background photo
+![alt text](Design/ScreenShots/background.png)
+
+2. Users can open an info window to access settings of their poem
+![alt text](Design/ScreenShots/settings.png)
+
+##Added Features
+The users can adjust the font size of all words on the screen.
+They can share the poem to social media. The share includes a description and a screenshot of their poem.
+They can select a photo from their library and use it as the background of the canvas.
+
+
 
